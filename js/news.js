@@ -63,7 +63,7 @@ const displaynews = news => {
                     <div class="col-lg-7 col-sm-12">
                         <div class="card-body">
                             <h5 class="card-title fs-2 fw-bold mt-5">${single.title}</h5>
-                            <p class="card-text fs-4 text-secondary mt-5">${single.details.slice(0, 200)}</p>
+                            <p class="card-text fs-4 text-secondary mt-5">${single.details}</p>
                             <div class="d-flex mt-5">
                                 <img style="width:5%; height:10%;border-radius: 50%;" src="${single.author.img}" alt=" ...">
                                 <div>
