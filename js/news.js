@@ -1,5 +1,7 @@
 const loadnews = (id) => {
     // console.log(id);
+
+
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
     // console.log(url);
     // fetch('https://openapi.programming-hero.com/api/news/category/01')
@@ -15,8 +17,6 @@ const loadnews = (id) => {
 
 const displaynews = news => {
     // console.log(news);
-
-
     const totalNews = document.getElementById("total-news");
     totalNews.innerText = news.length;
     // const totalNews = news.length;
@@ -73,6 +73,9 @@ const displaynews = news => {
         newsContainer.appendChild(newsDiv);
 
     })
+
+    // stop spinner or loader
+    toggleSpinner(false);
 }
 
 

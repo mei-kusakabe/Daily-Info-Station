@@ -26,6 +26,7 @@ const displayCategories = categories => {
         categoriesContainerDiv.innerHTML = `
         <a class="fw-bold px-3 fs-5 text-secondary text-decoration-none" onclick ="loadnews('${result}')">${category.category_name}</a>
             `;
+        // toggleSpinner(true);
         //console.log(category.category_name);
         // const nname = category.category_name;
 
@@ -36,6 +37,20 @@ const displayCategories = categories => {
         cnt1++;
 
     })
+
+
+
+    toggleSpinner(true);
+
+    const toggleSpinner = isLoading => {
+        const loaderSection = document.getElementById('loader');
+        if (isLoading) {
+            loaderSection.classList.remove('d-none')
+        }
+        else {
+            loaderSection.classList.add('d-none');
+        }
+    }
 
 }
 
