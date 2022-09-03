@@ -20,8 +20,6 @@ const displaynews = news => {
     const totalNews = document.getElementById("total-news");
     totalNews.innerText = news.length;
     // const totalNews = news.length;
-
-
     // console.log(news.data);
     // console.log(news[0].author.name);
     // console.log(news[0].author.img);
