@@ -1,14 +1,29 @@
 const loadnews = (id) => {
     // console.log(id);
 
-
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+
     // console.log(url);
     // fetch('https://openapi.programming-hero.com/api/news/category/01')
     fetch(url)
         .then(res => res.json())
         .then(data => displaynews(data.data))
+
 }
+//spinner-function 
+
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+        console.log("spinner done");
+    }
+    else {
+        loaderSection.classList.add('d-none');
+    }
+}
+
+
 
 // const list = [];
 // const totalNews = document.getElementById("total-news");
@@ -29,6 +44,7 @@ const displaynews = news => {
     // console.log(news[0].title);
     // console.log(news[0].details);
     const newsContainer = document.getElementById('news-container');
+
     newsContainer.innerHTML = ``;
 
     news.forEach(single => {

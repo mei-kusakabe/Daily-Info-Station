@@ -2,6 +2,8 @@ const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
         .then(res => res.json())
         .then(data => displayCategories(data.data.news_category))
+
+
 }
 
 
@@ -19,6 +21,8 @@ const displayCategories = categories => {
     //const newsName = document.getElementById("news-name");
     //newsName.innerText = categories;
 
+
+
     categories.forEach(category => {
         const categoriesContainerDiv = document.createElement('span');
         txt2 = cnt.toString();
@@ -26,7 +30,12 @@ const displayCategories = categories => {
         categoriesContainerDiv.innerHTML = `
         <a class="fw-bold px-3 fs-5 text-secondary text-decoration-none" onclick ="loadnews('${result}')">${category.category_name}</a>
             `;
-        // toggleSpinner(true);
+
+
+        // spinner-start
+
+        toggleSpinner(true);
+
         //console.log(category.category_name);
         // const nname = category.category_name;
 
@@ -40,17 +49,6 @@ const displayCategories = categories => {
 
 
 
-    toggleSpinner(true);
-
-    const toggleSpinner = isLoading => {
-        const loaderSection = document.getElementById('loader');
-        if (isLoading) {
-            loaderSection.classList.remove('d-none')
-        }
-        else {
-            loaderSection.classList.add('d-none');
-        }
-    }
 
 }
 
