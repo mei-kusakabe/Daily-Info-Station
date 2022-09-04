@@ -1,10 +1,9 @@
-const loadnews = (id) => {
+// loadnews for specific news category
+const loadnews = async (id) => {
     // console.log(id);
-
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-
     // console.log(url);
-    // fetch('https://openapi.programming-hero.com/api/news/category/01')
+
     fetch(url)
         .then(res => res.json())
         .then(data => displaynews(data.data))
@@ -23,15 +22,16 @@ const toggleSpinner = isLoading => {
     }
 }
 
-// const list = [];
-// const totalNews = document.getElementById("total-news");
-// totalNews.innerText = list.length;
 
+// displaynews for specific news category
 
 const displaynews = news => {
     console.log(news);
     const totalNews = document.getElementById("total-news");
     totalNews.innerText = news.length;
+
+    // debugging
+
     // const totalNews = news.length;
     //console.log(news.data);
     // console.log(news[0].author.name);
@@ -41,6 +41,8 @@ const displaynews = news => {
     // console.log(news[0].rating.number);
     // console.log(news[0].title);
     // console.log(news[0].details);
+
+
     const newsContainer = document.getElementById('news-container');
 
     newsContainer.innerHTML = ``;
@@ -50,15 +52,17 @@ const displaynews = news => {
         let i = 0;
         let txt1 = "0";
         let cnt = 1;
+
         //  console.log(single);
         // const newsContainer = document.getElementById('news-container');
+
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         txt2 = cnt.toString();
         let result = txt1.concat(txt2);
         newsDiv.innerHTML = `
         
-   <div class="col-12 col-lg-12 col-sm-10">
+   <div class="col-12 col-lg-12 col-sm-12">
         <div class="card">
               <div class="row">
                  <div class="col-lg-5 col-sm-12">
@@ -83,7 +87,7 @@ const displaynews = news => {
                                     <i class="fa-regular fa-star"></i>
                                     <i class="fa-regular fa-star"></i>
                                 </div> 
-                         <button onclick="loadModal('${single._id}')"href="#" class="btn btn-primary w-50 h-25 px-2 py-3" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>
+                            <button onclick="loadnewsDetails('${single._id}')"href="#" class="btn btn-primary w-50 h-25 px-2 py-3" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>
                             </div >
                         </div >
                     </div >
@@ -100,11 +104,16 @@ const displaynews = news => {
     toggleSpinner(false);
 }
 
+// loadnews for default news category
 
 loadnews("01");
 
 
-const loadModal = (id) => {
+
+// loading-individual-news-details
+
+
+const loadnewsDetails = async (id) => {
     console.log(id);
     const url = ` https://openapi.programming-hero.com/api/news/${id}`;
     console.log(url);
@@ -114,6 +123,7 @@ const loadModal = (id) => {
 };
 
 
+// displaying-individual-news-details
 
 const displaynewsDetails = (modals) => {
     console.log(modals);
@@ -126,16 +136,4 @@ const displaynewsDetails = (modals) => {
     <p class ="mt-5"> <span class ="fw-bold fs-5"> Details : </span> ${modals[0].details ? modals[0].details : 'No details Found'}</p>
     <p><span class ="fw-bold fs-5"> Author name: </span> ${modals[0].author.name ? modals[0].author.name : 'No author Found'}</p>
     `
-    //  modalTitle.innerText = modals.title;
 };
-
-// const displaynewsDetails = news => {
-//     console.log(news.author.name);
-//     const modalTitle = document.getElementById('phoneDetailModalLabel');
-//     modalTitle.innerText = news.name;
-//     const phoneDetails = document.getElementById('phone-details');
-//     //console.log(phone.author.name);
-//     phoneDetails.innerHTML = `
-//         <p>Release Date: ${news.author.name ? phone.author.name : 'No Release Date Found'}</p>
-//     `
-// }
