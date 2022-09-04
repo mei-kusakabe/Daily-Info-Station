@@ -23,19 +23,17 @@ const toggleSpinner = isLoading => {
     }
 }
 
-
-
 // const list = [];
 // const totalNews = document.getElementById("total-news");
 // totalNews.innerText = list.length;
 
 
 const displaynews = news => {
-    // console.log(news);
+    console.log(news);
     const totalNews = document.getElementById("total-news");
     totalNews.innerText = news.length;
     // const totalNews = news.length;
-    // console.log(news.data);
+    //console.log(news.data);
     // console.log(news[0].author.name);
     // console.log(news[0].author.img);
 
@@ -48,10 +46,16 @@ const displaynews = news => {
     newsContainer.innerHTML = ``;
 
     news.forEach(single => {
-        // console.log(meal);
+        console.log(single);
+        let i = 0;
+        let txt1 = "0";
+        let cnt = 1;
+        //  console.log(single);
         // const newsContainer = document.getElementById('news-container');
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
+        txt2 = cnt.toString();
+        let result = txt1.concat(txt2);
         newsDiv.innerHTML = `
         
    <div class="col-12 col-lg-12 col-sm-10">
@@ -67,7 +71,7 @@ const displaynews = news => {
                             <div class="d-flex mt-5">
                                 <img style="width:5%; height:10%;border-radius: 50%;" src="${single.author.img}" alt=" ...">
                                 <div>
-                                    <h4 class="fw-bold">${single.author.name}</h4>
+                                    <h4 class="fw-bold"> ${single.author.name ? single.author.name : 'No Author found'}</h4>
                                     <p class="text-secondary">  ${single.author.published_date ? single.author.published_date.substring(0, 10) : 'No date'}</p >
                                 </div >
                                 <div class="p-5"> <i
@@ -78,7 +82,8 @@ const displaynews = news => {
                                     <i class="fa-regular fa-star"></i>
                                     <i class="fa-regular fa-star"></i>
                                     <i class="fa-regular fa-star"></i>
-                                </div>
+                                </div> 
+                         <button onclick="loadModal('${single._id}')"href="#" class="btn btn-primary w-50 h-25 px-2 py-3" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>
                             </div >
                         </div >
                     </div >
@@ -86,6 +91,7 @@ const displaynews = news => {
            </div >
        </div >
     `;
+        i++;
         newsContainer.appendChild(newsDiv);
 
     })
@@ -96,3 +102,40 @@ const displaynews = news => {
 
 
 loadnews("01");
+
+
+const loadModal = (id) => {
+    console.log(id);
+    const url = ` https://openapi.programming-hero.com/api/news/${id}`;
+    console.log(url);
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => displaynewsDetails(data.data));
+};
+
+
+
+const displaynewsDetails = (modals) => {
+    console.log(modals);
+    console.log(modals[0].title);
+    const modalTitle = document.getElementById("phoneDetailModalLabel");
+    modalTitle.innerText = modals[0].title;
+    const phoneDetails = document.getElementById('phone-details');
+    phoneDetails.innerHTML = `
+    <img src="${modals[0].thumbnail_url}" class="card-img-top img-fluid" alt="...">
+    <p class ="mt-5"> <span class ="fw-bold fs-5"> Details : </span> ${modals[0].details ? modals[0].details : 'No details Found'}</p>
+    <p><span class ="fw-bold fs-5"> Author name: </span> ${modals[0].author.name ? modals[0].author.name : 'No author Found'}</p>
+    `
+    //  modalTitle.innerText = modals.title;
+};
+
+// const displaynewsDetails = news => {
+//     console.log(news.author.name);
+//     const modalTitle = document.getElementById('phoneDetailModalLabel');
+//     modalTitle.innerText = news.name;
+//     const phoneDetails = document.getElementById('phone-details');
+//     //console.log(phone.author.name);
+//     phoneDetails.innerHTML = `
+//         <p>Release Date: ${news.author.name ? phone.author.name : 'No Release Date Found'}</p>
+//     `
+// }
